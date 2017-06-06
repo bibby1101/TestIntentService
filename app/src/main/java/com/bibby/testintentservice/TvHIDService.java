@@ -1,82 +1,35 @@
 package com.bibby.testintentservice;
 
-import android.app.IntentService;
+import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
-import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
-import java.util.concurrent.TimeUnit;
+public class TvHIDService extends Service {
 
-public class TvHIDService extends IntentService {
+    private static final String TAG = TvHIDService.class.getSimpleName();
+    CallBack callBack;
 
-    private final static String TAG = TvHIDService.class.getSimpleName();
-    private int i = 0;
+    private long startTime = 0;
+    private long millis = 0;
 
-    /**
-     * Creates an IntentService.
-     *
-     * Constructor with no argument.
-     */
-    public TvHIDService(){
-        super("TvHIDService");
-    }
-
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     */
-    public TvHIDService(String name) {
-        super(name);
-        Log.d(TAG, "onConstructed, thread id : " + Thread.currentThread().getId());
-    }
-
-    @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
-        Log.d(TAG, "onHandleIntent, thread id : " + Thread.currentThread().getId());
-
-        ResultReceiver rec = intent.getParcelableExtra("receiver");
-
-        Log.d(TAG, "onHandleIntent(), start work.");
-        Log.d(TAG, "print start, init i = " + i);
-        for(; i< 5; i++) {
-            Log.d(TAG, "i = " + i);
-
-            try {
-                Thread.sleep(2000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    private final IBinder mBinder = new LocalBinder();
+    Handler handler = new Handler();
+    Runnable serviceRunnable = new Runnable() {
+        @Override
+        public void run() {
+            millis = System.currentTimeMillis() - startTime;
+            callBack.updateClient(millis); //Update Activity (client) by the implementd callback
+            handler.postDelayed(this, 1000);
         }
-        Log.d(TAG, "onHandleIntent(), end work.");
+    };
 
-        Bundle b = new Bundle();
-        b.putString("Service","i = "+i);
-        rec.send(9527, b);
-    }
-
-    @Override
-    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand, thread id : " + Thread.currentThread().getId());
-
-//        return START_STICKY;
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        Log.d(TAG, "onBind, thread id : " + Thread.currentThread().getId());
-        return super.onBind(intent);
-    }
-
-    @Override
-    public boolean onUnbind(Intent intent) {
-        Log.d(TAG, "onUnbind, thread id : " + Thread.currentThread().getId());
-        return super.onUnbind(intent);
+    public interface CallBack {
+        void updateClient(long data);
     }
 
     @Override
@@ -89,5 +42,48 @@ public class TvHIDService extends IntentService {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy, thread id : " + Thread.currentThread().getId());
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand, thread id : " + Thread.currentThread().getId());
+
+        return START_STICKY;
+//        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind, thread id : " + Thread.currentThread().getId());
+
+        return mBinder;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(TAG, "onUnbind, thread id : " + Thread.currentThread().getId());
+
+        return super.onUnbind(intent);
+    }
+
+    public void startCounter(){
+        startTime = System.currentTimeMillis();
+        handler.postDelayed(serviceRunnable, 0);
+        Toast.makeText(getApplicationContext(), "Counter started", Toast.LENGTH_SHORT).show();
+    }
+
+    public void stopCounter(){
+        handler.removeCallbacks(serviceRunnable);
+    }
+
+    public class LocalBinder extends Binder {
+        public TvHIDService getServiceInstance(){
+            return TvHIDService.this;
+        }
+    }
+
+    public void registerClient(CallBack callBack){
+        this.callBack = callBack;
     }
 }

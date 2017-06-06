@@ -27,6 +27,10 @@ public class MyResultReceiver extends ResultReceiver {
         mReceiver = receiver;
     }
 
+    public void removeReceiver() {
+        mReceiver = null;
+    }
+
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
 //        super.onReceiveResult(resultCode, resultData);
