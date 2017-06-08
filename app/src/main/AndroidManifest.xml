@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bibby.testintentservice">
 
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,9 +24,22 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".TvHIDIntentService"/>
+        <service
+            android:name=".TvHIDIntentService"
+            android:enabled="true"
+        />
 
-        <service android:name=".TvHIDService"/>
+        <service
+            android:name=".TvHIDService"
+            android:enabled="true"
+        />
+
+        <receiver android:name=".BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 

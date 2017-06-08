@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements MyResultReceiver.
     protected void onDestroy() {
         super.onDestroy();
 //        myResultReceiver.removeReceiver();
+        if(myService!=null)
+            unbindService(mConnection);
     }
 
     @Override
@@ -102,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements MyResultReceiver.
             TvHIDService.LocalBinder binder = (TvHIDService.LocalBinder) service;
             myService = binder.getServiceInstance(); //Get instance of your service!
             myService.registerClient(MainActivity.this); //Activity register in the service as client for callabcks!
-            myService.startCounter();
+//            myService.startCounter();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
             Toast.makeText(MainActivity.this, "onServiceDisconnected called", Toast.LENGTH_SHORT).show();
-            myService.stopCounter();
+//            myService.stopCounter();
         }
     };
 
