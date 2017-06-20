@@ -1,19 +1,16 @@
 package com.bibby.testintentservice;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-public class BootBroadcastReceiver extends BroadcastReceiver implements TvHIDService.CallBack {
+public class BootBroadcastReceiver extends BroadcastReceiver {
 
     public static final String TAG = BootBroadcastReceiver.class.getSimpleName();
     Context context;
-    TvHIDService myService;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -22,36 +19,47 @@ public class BootBroadcastReceiver extends BroadcastReceiver implements TvHIDSer
 
         this.context = context;
 
-        if((intent.getAction()).equals(Intent.ACTION_BOOT_COMPLETED)){
+        if( intent==null && intent.getAction()==null ){
+            Log.e(TAG, "intent is null or intent action is null");
+            return;
+        }
+
+        if( intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) ){
             Intent serviceIntent = new Intent(context, TvHIDService.class);
             context.startService(serviceIntent); //Starting the service
-            context.bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE); //Binding to the service!
             Toast.makeText(context, "ACTION_BOOT_COMPLETED", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            Toast.makeText(context, "onServiceConnected called", Toast.LENGTH_SHORT).show();
-            // We've binded to LocalService, cast the IBinder and get LocalService instance
-            TvHIDService.LocalBinder binder = (TvHIDService.LocalBinder) service;
-            myService = binder.getServiceInstance(); //Get instance of your service!
-            myService.registerClient(BootBroadcastReceiver.this); //Activity register in the service as client for callabcks!
-//            myService.startCounter();
+        else if( intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED) ){
+            final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+            switch (state) {
+                case BluetoothAdapter.STATE_OFF:
+                    Log.e(TAG, "STATE_OFF");
+                    break;
+                case BluetoothAdapter.STATE_TURNING_OFF:
+                    Log.e(TAG, "STATE_TURNING_OFF");
+                    break;
+                case BluetoothAdapter.STATE_ON:
+                    Log.e(TAG, "STATE_ON");
+                    break;
+                case BluetoothAdapter.STATE_TURNING_ON:
+                    Log.e(TAG, "STATE_TURNING_ON");
+                    break;
+                case BluetoothAdapter.STATE_CONNECTED:
+                    Log.e(TAG, "STATE_CONNECTED");
+                    break;
+                case BluetoothAdapter.STATE_CONNECTING:
+                    Log.e(TAG, "STATE_CONNECTING");
+                    break;
+                case BluetoothAdapter.STATE_DISCONNECTED:
+                    Log.e(TAG, "STATE_DISCONNECTED");
+                    break;
+                case BluetoothAdapter.STATE_DISCONNECTING:
+                    Log.e(TAG, "STATE_DISCONNECTING");
+                    break;
+                case BluetoothAdapter.ERROR:
+                    Log.e(TAG, "ERROR");
+                    break;
+            }
         }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            Toast.makeText(context, "onServiceDisconnected called", Toast.LENGTH_SHORT).show();
-//            myService.stopCounter();
-        }
-    };
-
-    @Override
-    public void updateClient(long data) {
-        Log.d(TAG, "updateClient, thread id : " + Thread.currentThread().getId());
-        Log.d(TAG, "updateClient : " + data);
     }
 }

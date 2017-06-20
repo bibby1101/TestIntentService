@@ -57,7 +57,7 @@ public class TvHIDService extends Service {
     private BluetoothInputDevice mService;
     private boolean mIsProfileReady;
 
-    private static final int PROXMITY_RSSI_THRESHOLD = -50;
+    private static final int PROXMITY_RSSI_THRESHOLD = -80;
     private static final int PROXMITY_PATHLOSS_THRESHOLD = 90;
 
     private static final int INVALID_TX_POWER = 0xffff;
@@ -74,7 +74,7 @@ public class TvHIDService extends Service {
 
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 1000000;
+    private static final long SCAN_PERIOD = 5*1000;
 
 
 
@@ -83,22 +83,6 @@ public class TvHIDService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate, thread id : " + Thread.currentThread().getId());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy, thread id : " + Thread.currentThread().getId());
-
-        unregisterReceiver(mBluetoothReceiver);
-        scanLeDevice(false);
-
-        mBluetoothAdapter.closeProfileProxy(BluetoothProfile.INPUT_DEVICE, mService);
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand, thread id : " + Thread.currentThread().getId());
 
         mHandler = new Handler();
 
@@ -130,6 +114,25 @@ public class TvHIDService extends Service {
             stopSelf();
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy, thread id : " + Thread.currentThread().getId());
+
+        unregisterReceiver(mBluetoothReceiver);
+        scanLeDevice(false);
+
+        mBluetoothAdapter.closeProfileProxy(BluetoothProfile.INPUT_DEVICE, mService);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand, thread id : " + Thread.currentThread().getId());
+
+        scanLeDevice(true);
+
         return START_STICKY;
 //        return super.onStartCommand(intent, flags, startId);
     }
@@ -140,7 +143,7 @@ public class TvHIDService extends Service {
         Log.d(TAG, "onBind, thread id : " + Thread.currentThread().getId());
 
         scanLeDevice(true);
-        registerReceiver(mBluetoothReceiver, mIntentFilter);
+//        registerReceiver(mBluetoothReceiver, mIntentFilter);
 
         return mBinder;
     }
@@ -190,6 +193,7 @@ public class TvHIDService extends Service {
         }
 
         if(mService !=null){
+//            mService.disconnect(device);
             mService.connect(device);
         } else {
             Log.v(TAG, "Bluetooth HID serivce is not ready");
@@ -199,13 +203,13 @@ public class TvHIDService extends Service {
     private void scanLeDevice(final boolean enable) {
         if (enable) {
             // Stops scanning after a pre-defined scan period.
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mScanning = false;
-                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                }
-            }, SCAN_PERIOD);
+//            mHandler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    mScanning = false;
+//                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+//                }
+//            }, SCAN_PERIOD);
 
             mScanning = true;
             mBluetoothAdapter.startLeScan(mLeScanCallback);
@@ -259,20 +263,83 @@ public class TvHIDService extends Service {
                 int preBondState = intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE,
                                                    BluetoothDevice.ERROR);
 
-                Log.d("170608", "bondState : " + bondState);
-                Log.d("170608", "preBondState : " + preBondState);
+                switch (preBondState) {
+                    case 10:
+                        Log.d(TAG, "prebondState : BOND_NONE(10)");
+                        break;
+                    case 11:
+                        Log.d(TAG, "prebondState : BOND_BONDING(11)");
+                        break;
+                    case 12:
+                        Log.d(TAG, "prebondState : BOND_BONDED(12)");
+                        break;
+                    default:
+                        Log.d(TAG, "prebondState : BOND_ERROR("+preBondState+")");
+                }
+                Log.d(TAG, "bondState : " + (
+                    bondState==10?"BOND_NONE(10)":
+                    bondState==11?"BOND_BONDING(11)":
+                    bondState==12?"BOND_BONDED(12)":"BOND_ERROR("+bondState+")")
+                );
 
-                // BluetoothDevice.ERROR
+                // BluetoothDevice.ERROR -2147483648
                 // BluetoothDevice.BOND_NONE 10
                 // BluetoothDevice.BOND_BONDING 11
                 // BluetoothDevice.BOND_BONDED 12
 
-                // TODO: 2017/6/8 無法配對時 10 -> 11 and 11-> 10
+                // TODO: 2017/6/8 無法配對時 10 -> 11 and 11 -> 10
+                // TODO: 2017/6/19 可配對時 10 -> 11 and 11 -> 12
 
             } else if(action.equals(BluetoothDevice.ACTION_UUID)){
                 doHogpConnect(remoteDevice);
             } else if(action.equals(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED)) {
                 Log.v(TAG, "Connection state changed");
+
+                int profileState = intent.getIntExtra(BluetoothProfile.EXTRA_STATE,
+                        BluetoothAdapter.ERROR);
+                int preProfileState = intent.getIntExtra(BluetoothProfile.EXTRA_PREVIOUS_STATE,
+                        BluetoothAdapter.ERROR);
+
+                switch (preProfileState) {
+                    case 0:
+                        Log.d(TAG, "preProfileState : STATE_DISCONNECTED(0)");
+                        break;
+                    case 1:
+                        Log.d(TAG, "preProfileState : STATE_CONNECTING(1)");
+                        break;
+                    case 2:
+                        Log.d(TAG, "preProfileState : STATE_CONNECTED(2)");
+                        break;
+                    case 3:
+                        Log.d(TAG, "preProfileState : STATE_DISCONNECTING(3)");
+                        break;
+                    default:
+                        Log.d(TAG, "preProfileState : STATE_ERROR("+preProfileState+")");
+                }
+                Log.d(TAG, "profileState : " + (
+                    profileState==0?"STATE_DISCONNECTED(0)":
+                    profileState==1?"STATE_CONNECTING(1)":
+                    profileState==2?"STATE_CONNECTED(2)":
+                    profileState==3?"STATE_DISCONNECTING(3)":"STATE_ERROR("+profileState+")")
+                );
+
+                if(preProfileState==1&&profileState==0){
+//                    Intent i = new Intent();
+//                    i.setClass(TvHIDService.this, PairingActivity.class);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(i);
+                }
+
+                // BluetoothAdapter.ERROR -2147483648
+                // BluetoothProfile.STATE_CONNECTING 1
+                // BluetoothProfile.STATE_CONNECTED 2
+                // BluetoothProfile.STATE_DISCONNECTING 3
+                // BluetoothProfile.STATE_DISCONNECTED 0
+
+                // TODO: 2017/6/19 0 -> 1 and 1 -> 0 無法與遙控器通訊
+                // TODO: 2017/6/19 0 -> 1 and 1 -> 2 連線成功
+                // TODO: 2017/6/19 1 -> 2 and 2 -> 0 太久沒用自動斷線 or 螢幕關閉
+
             }
         }
     };
@@ -307,14 +374,14 @@ public class TvHIDService extends Service {
                 for(j=0; j<element_len-1;j++,j++)
                 {
                     uuid = scanRecord[i+j+2]+(scanRecord[i+j+3]<<8);
-                    Log.i(TAG, "containHogpUUID Got UUID uuid=0x" + Integer.toHexString(uuid));
+//                    Log.i(TAG, "containHogpUUID Got UUID uuid=0x" + Integer.toHexString(uuid));
                     if (uuid == HOGP_UUID16) {
                         return true;
                     }
                 }
             } else if (element_type >= UUID32_SERVICE_FLAG_MORE
                     && element_type >= UUID128_SERVICE_FLAG_COMPLETE){
-                Log.i(TAG, "Do not support parsing 32bit or 12bit UUID now");
+//                Log.i(TAG, "Do not support parsing 32bit or 12bit UUID now");
             }
             i+= element_len+1;
         }
@@ -378,19 +445,39 @@ public class TvHIDService extends Service {
             new BluetoothAdapter.LeScanCallback() {
                 @Override
                 public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
-                    Log.i(TAG, "onLeScan device="+ device + "rssi=" + rssi);
                     if(isGoodHogpRc(rssi, scanRecord) ==  true) {
+
+                        Log.i(TAG, "onLeScan device="+ device + "rssi=" + rssi);
 
                         //doHogpConnect(device);
 
                         if(device.getBondState() == BluetoothDevice.BOND_NONE) {
-                            if(device.createBond() == false) {
-                                Log.i(TAG, "Start bond failed="+ device);
+                            if(mScanning) {
+                                mScanning = false;
+                                if(device.createBond() == false) {
+                                    Log.i(TAG, "Start bond failed="+ device);
+                                }
+                                mHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mScanning = true;
+                                    }
+                                }, SCAN_PERIOD);
                             }
                         } else if(device.getBondState() == BluetoothDevice.BOND_BONDED){
                             Log.i(TAG, "Connect directly="+ device);
                             //lgh we may start connect directly, this code does not have any chance to test
-                            doHogpConnect(device);
+
+                            if(mScanning) {
+                                mScanning = false;
+                                doHogpConnect(device);
+                                mHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mScanning = true;
+                                    }
+                                }, SCAN_PERIOD);
+                            }
                         }
 
                     } else {
