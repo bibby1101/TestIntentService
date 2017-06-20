@@ -1,19 +1,18 @@
 package com.bibby.testintentservice;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Handler;
 import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements MyResultReceiver.Receiver, TvHIDService.CallBack {
+public class MainActivity extends Activity implements MyResultReceiver.Receiver, TvHIDService.CallBack {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MyResultReceiver.
 //                intent.putExtra("receiver", myResultReceiver);
 //                startService(intent);
 
+
                 startService(serviceIntent); //Starting the service
                 bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE); //Binding to the service!
                 Toast.makeText(MainActivity.this, "Button checked", Toast.LENGTH_SHORT).show();
@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements MyResultReceiver.
     @Override
     protected void onResume() {
         super.onResume();
+
+        startService(serviceIntent); //Starting the service
+        bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE); //Binding to the service!
+
     }
 
     @Override
@@ -67,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements MyResultReceiver.
     protected void onDestroy() {
         super.onDestroy();
 //        myResultReceiver.removeReceiver();
+        if(myService!=null)
+            unbindService(mConnection);
     }
 
     @Override
@@ -102,13 +108,13 @@ public class MainActivity extends AppCompatActivity implements MyResultReceiver.
             TvHIDService.LocalBinder binder = (TvHIDService.LocalBinder) service;
             myService = binder.getServiceInstance(); //Get instance of your service!
             myService.registerClient(MainActivity.this); //Activity register in the service as client for callabcks!
-            myService.startCounter();
+//            myService.startCounter();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
             Toast.makeText(MainActivity.this, "onServiceDisconnected called", Toast.LENGTH_SHORT).show();
-            myService.stopCounter();
+//            myService.stopCounter();
         }
     };
 
