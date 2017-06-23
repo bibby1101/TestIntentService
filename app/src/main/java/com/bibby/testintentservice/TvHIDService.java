@@ -45,6 +45,8 @@ public class TvHIDService extends Service {
 
     public interface CallBack {
         void updateClient(long data);
+        void onConnectState(int oldstate, int nowstate);
+        void onBondState(int oldstate, int nowstate);
     }
 
 
@@ -282,6 +284,10 @@ public class TvHIDService extends Service {
                     bondState==12?"BOND_BONDED(12)":"BOND_ERROR("+bondState+")")
                 );
 
+                if(callBack!=null){
+                    callBack.onBondState(preBondState, bondState);
+                }
+
                 // BluetoothDevice.ERROR -2147483648
                 // BluetoothDevice.BOND_NONE 10
                 // BluetoothDevice.BOND_BONDING 11
@@ -324,10 +330,14 @@ public class TvHIDService extends Service {
                 );
 
                 if(preProfileState==1&&profileState==0){
-//                    Intent i = new Intent();
-//                    i.setClass(TvHIDService.this, PairingActivity.class);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    startActivity(i);
+                    Intent i = new Intent();
+                    i.setClass(TvHIDService.this, PairingActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                }
+
+                if(callBack!=null){
+                    callBack.onConnectState(preProfileState, profileState);
                 }
 
                 // BluetoothAdapter.ERROR -2147483648

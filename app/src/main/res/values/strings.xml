@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TestIntentService</string>
+    <string name="title_activity_pairing">PairingActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!--onboarding-->
+    <string name="onboarding_next_button_description">Next</string>
+    <string name="onboarding_finish_button_description">Finish</string>
+    <string name="onboarding_pre_button_description">Pre</string>
+    <string name="onboarding_section_1">Add your packages quickly and easily</string>
+    <string name="onboarding_intro_1">Support 640+ express companies all over the world.</string>
+    <string name="onboarding_section_2">Input numbers by just one touch</string>
+    <string name="onboarding_intro_2">Scan the number and then, they are recognized.</string>
+    <string name="onboarding_section_3">Keep the delivery status updated</string>
+    <string name="onboarding_intro_3">Push notification when the delivery status is refreshed, so you can get the latest information.</string>
+    <string name="onboarding_finish_button_description_wait">Preparing, please wait…</string>
+    <!--onboarding end-->
+
 </resources>
