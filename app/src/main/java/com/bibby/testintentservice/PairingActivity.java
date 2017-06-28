@@ -164,7 +164,15 @@ public class PairingActivity extends AppCompatActivity implements TvHIDService.C
     public void onConnectState(int oldstate, int nowstate) {
         Log.d(TAG, "onConnectState : " + oldstate + " -> " + nowstate);
         if(nowstate==2){
-            finish();
+            currentPosition += 1;
+            viewPager.setCurrentItem(currentPosition, true);
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 5000L);
         }
     }
 

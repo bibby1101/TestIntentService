@@ -49,17 +49,17 @@ public class PairingFragment extends Fragment{
 
         switch (page) {
             case 0:
-                sectionImg.setBackgroundResource(R.drawable.ic_beenhere_black_24dp);
+                sectionImg.setBackgroundResource(R.drawable.ic_notifications_black_24dp);
                 sectionLabel.setText(R.string.onboarding_section_1);
                 sectionIntro.setText(R.string.onboarding_intro_1);
                 break;
+//            case 1:
+//                sectionImg.setBackgroundResource(R.drawable.ic_camera_black_24dp);
+//                sectionLabel.setText(R.string.onboarding_section_2);
+//                sectionIntro.setText(R.string.onboarding_intro_2);
+//                break;
             case 1:
-                sectionImg.setBackgroundResource(R.drawable.ic_camera_black_24dp);
-                sectionLabel.setText(R.string.onboarding_section_2);
-                sectionIntro.setText(R.string.onboarding_intro_2);
-                break;
-            case 2:
-                sectionImg.setBackgroundResource(R.drawable.ic_notifications_black_24dp);
+                sectionImg.setBackgroundResource(R.drawable.ic_beenhere_black_24dp);
                 sectionLabel.setText(R.string.onboarding_section_3);
                 sectionIntro.setText(R.string.onboarding_intro_3);
                 break;

@@ -180,18 +180,24 @@ public class TvHIDService extends Service {
 
 
     void doHogpConnect(BluetoothDevice device){
+        Log.d(TAG, "doHogpConnect");
+
         ParcelUuid[] uuids = device.getUuids();
-        if (uuids == null) return;
+        if (uuids == null){
+            Log.d(TAG, "uuid is null");
+//            return;
+        }
+
         Log.v(TAG, "uuid update change event is received");
 
         if((device.getType()== BluetoothDevice.DEVICE_TYPE_CLASSIC)) {
             Log.v(TAG, "Not a LE device, ignore");
-            return;
+//            return;
         }
 
         if(!BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Hogp)) {
             Log.v(TAG, "Not support HOGP, ignore");
-            return;
+//            return;
         }
 
         if(mService !=null){
@@ -283,6 +289,13 @@ public class TvHIDService extends Service {
                     bondState==11?"BOND_BONDING(11)":
                     bondState==12?"BOND_BONDED(12)":"BOND_ERROR("+bondState+")")
                 );
+
+                if(preBondState==11&&bondState==10){
+                    Intent i = new Intent();
+                    i.setClass(TvHIDService.this, PairingActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                }
 
                 if(callBack!=null){
                     callBack.onBondState(preBondState, bondState);
@@ -426,7 +439,7 @@ public class TvHIDService extends Service {
 
                 String XiaomiRcName = new String("Opal RC"); // Opal RC // Xiaomi Remote
                 if(decodedName.startsWith(XiaomiRcName) == true) {
-                    Log.i(TAG, "we found our RC");
+//                    Log.i(TAG, "we found our RC");
                     return true;
                 }
             }
@@ -442,10 +455,10 @@ public class TvHIDService extends Service {
         boolean isXiaomiRc = isNameMatchextracName(scanRecord);
         if(isXiaomiRc == true && isHogpDevice == true) {
 //            if((tx_power-rssi) <= PROXMITY_PATHLOSS_THRESHOLD) {
-            if(rssi >= PROXMITY_RSSI_THRESHOLD) {
-                Log.i(TAG, "we found our RC that is closed enough");
-                return true;
-            }
+//            if(rssi >= PROXMITY_RSSI_THRESHOLD) {
+//                Log.i(TAG, "we found our RC that is closed enough");
+//                return true;
+//            }
         }
         return false;
     }
@@ -457,9 +470,9 @@ public class TvHIDService extends Service {
                 public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
                     if(isGoodHogpRc(rssi, scanRecord) ==  true) {
 
-                        Log.i(TAG, "onLeScan device="+ device + "rssi=" + rssi);
+//                        Log.i(TAG, "onLeScan device="+ device + "rssi=" + rssi);
 
-                        //doHogpConnect(device);
+//                        doHogpConnect(device);
 
                         if(device.getBondState() == BluetoothDevice.BOND_NONE) {
                             if(mScanning) {
@@ -475,10 +488,15 @@ public class TvHIDService extends Service {
                                 }, SCAN_PERIOD);
                             }
                         } else if(device.getBondState() == BluetoothDevice.BOND_BONDED){
-                            Log.i(TAG, "Connect directly="+ device);
-                            //lgh we may start connect directly, this code does not have any chance to test
-
                             if(mScanning) {
+
+                                Log.i(TAG, "Connect directly=" + device);
+                                Log.i(TAG, "we found our RC");
+
+                                if(rssi >= PROXMITY_RSSI_THRESHOLD) {
+                                    Log.i(TAG, "we found our RC that is closed enough");
+                                }
+
                                 mScanning = false;
                                 doHogpConnect(device);
                                 mHandler.postDelayed(new Runnable() {
