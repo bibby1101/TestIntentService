@@ -10,30 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0452402-fc20-450b-8392-9c5eafa4612a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingPagerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingPagerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/TvHIDService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/TvHIDService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
     </list>
     <ignored path="TestIntentService.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,9 +49,11 @@
             <state relative-caret-position="253">
               <caret line="476" column="62" selection-start-line="476" selection-start-column="62" selection-end-line="476" selection-end-column="62" />
               <folding>
+                <element signature="e#1142#1423#0" expanded="true" />
+                <element signature="e#1422#1423#0" expanded="true" />
+                <element signature="e#8340#13413#0" expanded="true" />
+                <element signature="e#13412#13413#0" expanded="true" />
                 <element signature="e#16968#19076#0" expanded="true" />
-                <element signature="e#18672#18920#0" expanded="true" />
-                <element signature="e#18919#18920#0" expanded="true" />
                 <element signature="e#19075#19076#0" expanded="true" />
               </folding>
             </state>
@@ -83,12 +63,10 @@
       <file leaf-file-name="PairingActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="2550">
               <caret line="174" column="22" selection-start-line="174" selection-start-column="22" selection-end-line="174" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5698#5838#0" expanded="true" />
-                <element signature="e#5837#5838#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,11 +78,8 @@
             <state relative-caret-position="825">
               <caret line="62" column="62" selection-start-line="62" selection-start-column="62" selection-end-line="62" selection-end-column="62" />
               <folding>
-                <element signature="e#1713#1742#0" expanded="true" />
-                <element signature="e#1782#1809#0" expanded="true" />
-                <element signature="e#2318#2345#0" expanded="true" />
-                <marker date="1498615664000" expanded="false" signature="1981:2010" ph="&quot;Input numbers by just one touch&quot;" />
-                <marker date="1498615664000" expanded="false" signature="2052:2079" ph="&quot;Scan the number and then, they are recognized.&quot;" />
+                <marker date="1498618885000" expanded="false" signature="1981:2010" ph="&quot;Input numbers by just one touch&quot;" />
+                <marker date="1498618885000" expanded="false" signature="2052:2079" ph="&quot;Scan the number and then, they are recognized.&quot;" />
               </folding>
             </state>
           </provider>
@@ -126,7 +101,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1545">
+            <state relative-caret-position="1920">
               <caret line="130" column="38" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -2062,8 +2037,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2120,10 +2093,12 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane />
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2470,7 +2445,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="796" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="796" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2479,14 +2454,14 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58235294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58235294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24474959" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24474959" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2544,9 +2519,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
@@ -2592,9 +2569,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
@@ -2640,9 +2619,11 @@
         <state relative-caret-position="1752">
           <caret line="95" column="61" selection-start-line="95" selection-start-column="61" selection-end-line="95" selection-end-column="61" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
@@ -2680,9 +2661,11 @@
         <state relative-caret-position="1752">
           <caret line="95" column="61" selection-start-line="95" selection-start-column="61" selection-end-line="95" selection-end-column="61" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
@@ -2720,9 +2703,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
@@ -2760,9 +2745,11 @@
         <state relative-caret-position="456">
           <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
@@ -2919,7 +2906,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1545">
+        <state relative-caret-position="1920">
           <caret line="130" column="38" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2959,23 +2946,18 @@
         <state relative-caret-position="825">
           <caret line="62" column="62" selection-start-line="62" selection-start-column="62" selection-end-line="62" selection-end-column="62" />
           <folding>
-            <element signature="e#1713#1742#0" expanded="true" />
-            <element signature="e#1782#1809#0" expanded="true" />
-            <element signature="e#2318#2345#0" expanded="true" />
-            <marker date="1498615664000" expanded="false" signature="1981:2010" ph="&quot;Input numbers by just one touch&quot;" />
-            <marker date="1498615664000" expanded="false" signature="2052:2079" ph="&quot;Scan the number and then, they are recognized.&quot;" />
+            <marker date="1498618885000" expanded="false" signature="1981:2010" ph="&quot;Input numbers by just one touch&quot;" />
+            <marker date="1498618885000" expanded="false" signature="2052:2079" ph="&quot;Scan the number and then, they are recognized.&quot;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bibby/testintentservice/PairingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
+        <state relative-caret-position="2550">
           <caret line="174" column="22" selection-start-line="174" selection-start-column="22" selection-end-line="174" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5698#5838#0" expanded="true" />
-            <element signature="e#5837#5838#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2985,9 +2967,11 @@
         <state relative-caret-position="253">
           <caret line="476" column="62" selection-start-line="476" selection-start-column="62" selection-end-line="476" selection-end-column="62" />
           <folding>
+            <element signature="e#1142#1423#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#8340#13413#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
             <element signature="e#16968#19076#0" expanded="true" />
-            <element signature="e#18672#18920#0" expanded="true" />
-            <element signature="e#18919#18920#0" expanded="true" />
             <element signature="e#19075#19076#0" expanded="true" />
           </folding>
         </state>
