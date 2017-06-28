@@ -98,8 +98,22 @@ public class MainActivity extends Activity implements MyResultReceiver.Receiver,
         Log.d(TAG, "updateClient : " + data);
     }
 
-    private ServiceConnection mConnection = new ServiceConnection() {
+    @Override
+    public void onConnectState(int oldstate, int nowstate) {
 
+    }
+
+    @Override
+    public void onBondState(int oldstate, int nowstate) {
+
+    }
+
+
+
+
+
+
+    private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
