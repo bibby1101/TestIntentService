@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestIntentService</string>
+    <string name="app_name">RemoteHIDService</string>
     <string name="title_activity_pairing">PairingActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -9,7 +9,7 @@
     <string name="onboarding_finish_button_description">Finish</string>
     <string name="onboarding_pre_button_description">Pre</string>
     <string name="onboarding_section_1">Prepare</string>
-    <string name="onboarding_intro_1">Hold mute and CH- while holding the remote near the box</string>
+    <string name="onboarding_intro_1">Hold Mute and CH- while holding the remote near the box</string>
     <string name="onboarding_section_2">Connecting</string>
     <string name="onboarding_intro_2">connecting, please keep within 20cm</string>
     <string name="onboarding_section_3">Connected</string>

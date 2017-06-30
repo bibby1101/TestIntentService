@@ -213,14 +213,13 @@ public class PairingActivity extends AppCompatActivity implements TvHIDService.C
 
         indicators = new ImageView[] {
                 (ImageView) this.findViewById(R.id.imageViewIndicator0),
-                (ImageView) this.findViewById(R.id.imageViewIndicator1),
-                (ImageView) this.findViewById(R.id.imageViewIndicator2) };
+                (ImageView) this.findViewById(R.id.imageViewIndicator1)};
     }
 
     private void initData() {
-        bgColors = new int[]{ContextCompat.getColor(this, R.color.colorPrimary),
+        bgColors = new int[]{ContextCompat.getColor(this, R.color.cyan_500), // colorPrimary
                 ContextCompat.getColor(this, R.color.cyan_500),
-                ContextCompat.getColor(this, R.color.light_blue_500)};
+                ContextCompat.getColor(this, R.color.cyan_500)}; // light_blue_500
     }
 
     @Override

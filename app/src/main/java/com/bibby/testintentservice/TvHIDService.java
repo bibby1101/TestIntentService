@@ -99,6 +99,7 @@ public class TvHIDService extends Service {
         mIntentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         mIntentFilter.addAction(BluetoothDevice.ACTION_UUID);
         mIntentFilter.addAction(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED);
+        mIntentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         registerReceiver(mBluetoothReceiver, mIntentFilter);
 
         // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
@@ -363,6 +364,38 @@ public class TvHIDService extends Service {
                 // TODO: 2017/6/19 0 -> 1 and 1 -> 2 連線成功
                 // TODO: 2017/6/19 1 -> 2 and 2 -> 0 太久沒用自動斷線 or 螢幕關閉
 
+            } else if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+                switch (state) {
+                    case BluetoothAdapter.STATE_OFF:
+                        Log.e(TAG, "STATE_OFF");
+                        break;
+                    case BluetoothAdapter.STATE_TURNING_OFF:
+                        Log.e(TAG, "STATE_TURNING_OFF");
+                        break;
+                    case BluetoothAdapter.STATE_ON:
+                        Log.e(TAG, "STATE_ON");
+                        scanLeDevice(true);
+                        break;
+                    case BluetoothAdapter.STATE_TURNING_ON:
+                        Log.e(TAG, "STATE_TURNING_ON");
+                        break;
+                    case BluetoothAdapter.STATE_CONNECTED:
+                        Log.e(TAG, "STATE_CONNECTED");
+                        break;
+                    case BluetoothAdapter.STATE_CONNECTING:
+                        Log.e(TAG, "STATE_CONNECTING");
+                        break;
+                    case BluetoothAdapter.STATE_DISCONNECTED:
+                        Log.e(TAG, "STATE_DISCONNECTED");
+                        break;
+                    case BluetoothAdapter.STATE_DISCONNECTING:
+                        Log.e(TAG, "STATE_DISCONNECTING");
+                        break;
+                    case BluetoothAdapter.ERROR:
+                        Log.e(TAG, "ERROR");
+                        break;
+                }
             }
         }
     };
@@ -457,7 +490,7 @@ public class TvHIDService extends Service {
 //            if((tx_power-rssi) <= PROXMITY_PATHLOSS_THRESHOLD) {
 //            if(rssi >= PROXMITY_RSSI_THRESHOLD) {
 //                Log.i(TAG, "we found our RC that is closed enough");
-//                return true;
+                return true;
 //            }
         }
         return false;
