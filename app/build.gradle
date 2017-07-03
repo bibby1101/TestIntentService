@@ -13,6 +13,7 @@ android {
     }
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -44,4 +45,6 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-location:11.0.2'
 //    compile 'com.google.android.gms:play-services:11.0.0'
+
+    compile 'com.android.support:multidex:1.0.1'
 }
