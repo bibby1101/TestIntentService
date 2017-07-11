@@ -111,7 +111,7 @@ public class MainActivity extends Activity implements MyResultReceiver.Receiver,
 
 //                startService(serviceIntent); //Starting the service
 //                bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE); //Binding to the service!
-                Toast.makeText(MainActivity.this, "Button checked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "Button checked", Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -241,7 +241,7 @@ public class PairingActivity extends AppCompatActivity implements TvHIDService.C
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            Toast.makeText(PairingActivity.this, "onServiceConnected called", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(PairingActivity.this, "onServiceConnected called", Toast.LENGTH_SHORT).show();
             // We've binded to LocalService, cast the IBinder and get LocalService instance
             TvHIDService.LocalBinder binder = (TvHIDService.LocalBinder) service;
             myService = binder.getServiceInstance(); //Get instance of your service!
@@ -251,7 +251,7 @@ public class PairingActivity extends AppCompatActivity implements TvHIDService.C
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
-            Toast.makeText(PairingActivity.this, "onServiceDisconnected called", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(PairingActivity.this, "onServiceDisconnected called", Toast.LENGTH_SHORT).show();
 //            myService.stopCounter();
         }
     };

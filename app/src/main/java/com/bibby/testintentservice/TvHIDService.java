@@ -258,13 +258,18 @@ public class TvHIDService extends Service {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.v(TAG, "Received intent: " + action) ;
-            BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//          if((!mLeDevices) ||
-//              (mLeDevices && !mLeDevices.contains(remoteDevice))) {
-//              Log.v(TAG, "Intents for devices that we do not care, ignore");
-//          }
 
             if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
+                BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if(remoteDevice.getName()==null){
+                    Log.v(TAG, "Intents for device name is null");
+                    return;
+                }
+                if(!remoteDevice.getName().startsWith("Opal")) {
+                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+                    return;
+                }
+
                 Log.v(TAG, "Bond state change event is received");
 
                 int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
@@ -291,7 +296,7 @@ public class TvHIDService extends Service {
                     bondState==12?"BOND_BONDED(12)":"BOND_ERROR("+bondState+")")
                 );
 
-                if(preBondState==11&&bondState==10){
+                if (preBondState == 11 && bondState == 10) {
                     Intent i = new Intent();
                     i.setClass(TvHIDService.this, PairingActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -311,8 +316,32 @@ public class TvHIDService extends Service {
                 // TODO: 2017/6/19 可配對時 10 -> 11 and 11 -> 12
 
             } else if(action.equals(BluetoothDevice.ACTION_UUID)){
+                Log.v(TAG, "uuid");
+
+                BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if(remoteDevice.getName()==null){
+                    Log.v(TAG, "Intents for device name is null");
+                    return;
+                }
+                if(!remoteDevice.getName().startsWith("Opal")) {
+                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+                    return;
+                }
+
                 doHogpConnect(remoteDevice);
+
             } else if(action.equals(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED)) {
+
+                BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if(remoteDevice.getName()==null){
+                    Log.v(TAG, "Intents for device name is null");
+                    return;
+                }
+                if(!remoteDevice.getName().startsWith("Opal")) {
+                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+                    return;
+                }
+
                 Log.v(TAG, "Connection state changed");
 
                 int profileState = intent.getIntExtra(BluetoothProfile.EXTRA_STATE,
@@ -343,7 +372,7 @@ public class TvHIDService extends Service {
                     profileState==3?"STATE_DISCONNECTING(3)":"STATE_ERROR("+profileState+")")
                 );
 
-                if(preProfileState==1&&profileState==0){
+                if (preProfileState == 1 && profileState == 0) {
                     Intent i = new Intent();
                     i.setClass(TvHIDService.this, PairingActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -365,6 +394,8 @@ public class TvHIDService extends Service {
                 // TODO: 2017/6/19 1 -> 2 and 2 -> 0 太久沒用自動斷線 or 螢幕關閉
 
             } else if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                Log.v(TAG, "changed");
+
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
                 switch (state) {
                     case BluetoothAdapter.STATE_OFF:
@@ -470,7 +501,7 @@ public class TvHIDService extends Service {
                 } catch (UnsupportedEncodingException e) {
                 }
 
-                String XiaomiRcName = new String("Opal RC"); // Opal RC // Xiaomi Remote
+                String XiaomiRcName = new String("Opal"); // Opal RC // Xiaomi Remote
                 if(decodedName.startsWith(XiaomiRcName) == true) {
 //                    Log.i(TAG, "we found our RC");
                     return true;
@@ -509,6 +540,11 @@ public class TvHIDService extends Service {
 
                         if(device.getBondState() == BluetoothDevice.BOND_NONE) {
                             if(mScanning) {
+                                Intent i = new Intent();
+                                i.setClass(TvHIDService.this, PairingActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+
                                 mScanning = false;
                                 if(device.createBond() == false) {
                                     Log.i(TAG, "Start bond failed="+ device);
@@ -520,7 +556,7 @@ public class TvHIDService extends Service {
                                     }
                                 }, SCAN_PERIOD);
                             }
-                        } else if(device.getBondState() == BluetoothDevice.BOND_BONDED){
+                        } else if(device.getBondState() == BluetoothDevice.BOND_BONDED) {
                             if(mScanning) {
 
                                 Log.i(TAG, "Connect directly=" + device);
