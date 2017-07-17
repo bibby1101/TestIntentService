@@ -78,6 +78,7 @@ public class TvHIDService extends Service {
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 5*1000;
 
+    private BluetoothDevice toConnectingDevice;
 
 
 
@@ -261,14 +262,25 @@ public class TvHIDService extends Service {
 
             if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
                 BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(remoteDevice.getName()==null){
-                    Log.v(TAG, "Intents for device name is null");
+
+                if(toConnectingDevice==null){
+                    Log.d(TAG, "toConnectingDevice is null");
                     return;
                 }
-                if(!remoteDevice.getName().startsWith("Opal")) {
-                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+
+                if(!remoteDevice.getAddress().equals(toConnectingDevice.getAddress())){
+                    Log.v(TAG, "Intents for device that we do not care, ignore");
                     return;
                 }
+
+//                if(remoteDevice==null){
+//                    Log.v(TAG, "Intents for device name is null");
+//                    return;
+//                }
+//                if(!remoteDevice.getName().startsWith("Opal")) {
+//                    Log.v(TAG, "Intents for device that we do not care, ignore");
+//                    return;
+//                }
 
                 Log.v(TAG, "Bond state change event is received");
 
@@ -319,28 +331,50 @@ public class TvHIDService extends Service {
                 Log.v(TAG, "uuid");
 
                 BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(remoteDevice.getName()==null){
-                    Log.v(TAG, "Intents for device name is null");
+
+                if(toConnectingDevice==null){
+                    Log.d(TAG, "toConnectingDevice is null");
                     return;
                 }
-                if(!remoteDevice.getName().startsWith("Opal")) {
-                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+
+                if(!remoteDevice.getAddress().equals(toConnectingDevice.getAddress())){
+                    Log.v(TAG, "Intents for device that we do not care, ignore");
                     return;
                 }
+
+//                if(remoteDevice.getName()==null){
+//                    Log.v(TAG, "Intents for device name is null");
+//                    return;
+//                }
+//                if(!remoteDevice.getName().startsWith("Opal")) {
+//                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+//                    return;
+//                }
 
                 doHogpConnect(remoteDevice);
 
             } else if(action.equals(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED)) {
 
                 BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(remoteDevice.getName()==null){
-                    Log.v(TAG, "Intents for device name is null");
+
+                if(toConnectingDevice==null){
+                    Log.d(TAG, "toConnectingDevice is null");
                     return;
                 }
-                if(!remoteDevice.getName().startsWith("Opal")) {
-                    Log.v(TAG, "Intents for devices that we do not care, ignore");
+
+                if(!remoteDevice.getAddress().equals(toConnectingDevice.getAddress())){
+                    Log.v(TAG, "Intents for device that we do not care, ignore");
                     return;
                 }
+
+//                if(remoteDevice.getName()==null){
+//                    Log.v(TAG, "Intents for device name is null");
+//                    return;
+//                }
+//                if(!remoteDevice.getName().startsWith("Opal")) {
+//                    Log.v(TAG, "Intents for device that we do not care, ignore");
+//                    return;
+//                }
 
                 Log.v(TAG, "Connection state changed");
 
@@ -546,6 +580,7 @@ public class TvHIDService extends Service {
                                 startActivity(i);
 
                                 mScanning = false;
+                                toConnectingDevice = device;
                                 if(device.createBond() == false) {
                                     Log.i(TAG, "Start bond failed="+ device);
                                 }
@@ -567,6 +602,7 @@ public class TvHIDService extends Service {
                                 }
 
                                 mScanning = false;
+                                toConnectingDevice = device;
                                 doHogpConnect(device);
                                 mHandler.postDelayed(new Runnable() {
                                     @Override
