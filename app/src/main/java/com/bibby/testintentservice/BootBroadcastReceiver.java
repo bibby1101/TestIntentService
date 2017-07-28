@@ -27,7 +27,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
         if( intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) ){
             Intent serviceIntent = new Intent(context, TvHIDService.class);
             context.startService(serviceIntent); //Starting the service
-            Toast.makeText(context, "ACTION_BOOT_COMPLETED", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "服務已啟動", Toast.LENGTH_SHORT).show();
         }
         else if( intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED) ){
             final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);

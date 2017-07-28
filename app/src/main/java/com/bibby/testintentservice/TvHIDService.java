@@ -574,6 +574,14 @@ public class TvHIDService extends Service {
 
                         if(device.getBondState() == BluetoothDevice.BOND_NONE) {
                             if(mScanning) {
+
+                                Log.i(TAG, "Bond directly=" + device);
+                                Log.i(TAG, "we found our RC");
+
+                                if(rssi >= PROXMITY_RSSI_THRESHOLD) {
+                                    Log.i(TAG, "we found our RC that is closed enough, to bond");
+                                }
+
                                 Intent i = new Intent();
                                 i.setClass(TvHIDService.this, PairingActivity.class);
                                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -598,7 +606,7 @@ public class TvHIDService extends Service {
                                 Log.i(TAG, "we found our RC");
 
                                 if(rssi >= PROXMITY_RSSI_THRESHOLD) {
-                                    Log.i(TAG, "we found our RC that is closed enough");
+                                    Log.i(TAG, "we found our RC that is closed enough, to connect");
                                 }
 
                                 mScanning = false;

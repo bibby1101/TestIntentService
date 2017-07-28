@@ -15,6 +15,10 @@
     <string name="onboarding_section_3">Connected</string>
     <string name="onboarding_intro_3">Remote connection success</string>
     <string name="onboarding_finish_button_description_wait">Preparing, please wait…</string>
+    <string name="onboarding_section_1_cht">配對</string>
+    <string name="onboarding_intro_1_cht">請持續按壓住 靜音 及 頻道一 並靠近主機</string>
+    <string name="onboarding_section_3_cht">已連線</string>
+    <string name="onboarding_intro_3_cht">遙控器已連線</string>
     <!--onboarding end-->
 
 </resources>
